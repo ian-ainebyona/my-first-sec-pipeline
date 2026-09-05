@@ -1,0 +1,21 @@
+name: Python Security Scan
+
+on: [push]
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4.1.7
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install Bandit security scanner
+        run: pip install bandit
+
+      - name: Run security scan on Python code
+        run: bandit -r .
